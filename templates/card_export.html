@@ -1,0 +1,104 @@
+{% extends "base.html" %}
+
+{% load humanize %}
+
+{% block content %}
+
+<ul class="breadcrumbs">
+  <li><a href="{% url 'home' %}">Home</a></li>
+  <li><a href="{% url 'card_list' %}">Cards</a></li>
+  <li class="current"><a href="{% url 'card_export' card.id %}">Export</a></li>
+</ul>
+
+<table class="responsive" width="100%" summary="Card in details.">
+    <form action="{% url 'card_export' card.id %}" method="get">
+    {% csrf_token %}
+    <col style="width:100">
+    <col style="width:100%">
+    <caption>Card Export</caption>
+    <tbody>
+    <tr>
+        <label for="card_format">
+            <th>Card format:</th>
+            <td>
+                <select id="card_format" name="card_format">
+                    <option value="a7paper" label="A7">A7</option>
+                    <option value="a8paper" label="A8" selected>A8</option>
+                    <option value="a9paper" label="A9">A9</option>
+                </select>
+            </td>
+        </label>
+    </tr>
+    <tr>
+        <label for="font_size">
+            <th>Font size:</th>
+            <td>
+            <select id="font_size" name="font_size">
+                <option value="11pt" label="11pt">11pt</option>
+                <option value="12pt" label="12pt" selected>12pt</option>
+                <option value="14pt" label="14pt">14pt</option>
+            </select>
+            </td>
+        </label>
+    </tr>
+    <tr>
+        <label for="grid">
+            <th>Grid:</th>
+            <td>
+                <input type="checkbox" id="grid_front" name="front_grid"/>Front
+                </br>
+                <input type="checkbox" id="grid_rear" name="front_rear"/>Rear
+            </td>
+        </label>
+    </tr>
+    <tr>
+        <label for="options">
+            <th>Options:</th>
+            <td>
+                <input type="checkbox" id="flip" name="flip"/>Flip
+                </br>
+                <input type="checkbox" id="print" name="print"/>Print
+            </td>
+        </label>
+    </tr>
+    </tbody>
+    <tfoot>
+        <tr>
+            <td></td>
+            <td>
+                <input type="submit" class="button small right" value="Export">
+            </td>
+        </tr>
+    </tfoot>
+    </form>
+</table>
+
+{% endblock %}
+
+{% block side_bar %}
+<div class="side-nav">
+    <a href="{% url 'box_list' %}" class="button small expand secondary">
+        Boxes
+    </a>
+    <a href="{% url 'sec_list' %}" class="button small expand secondary">
+        Sections
+    </a>
+    <a href="{% url 'sub_list' %}" class="button small expand secondary">   
+        Subsections
+    </a>
+    <a href="{% url 'card_list' %}" class="button small expand success">
+        Cards
+    </a>
+    <a href="{% url 'card_update' card.id %}" class="button small expand">
+        <i class="fi-page-edit"></i> Edit</a>
+    <a href="{% url 'card_delete' card.id %}" class="button small expand alert">
+        <i class="fi-page-delete"></i> Delete</a>
+    <a href="{% url 'card_export' card.id %}" class="button small expand success">
+        <i class="fi-page-export-pdf"></i> Export
+    </a>
+    <a href="" class="button small expand">
+        <i class="fi-page-copy"></i> Clone
+    </a>
+</div>
+{% endblock %}
+

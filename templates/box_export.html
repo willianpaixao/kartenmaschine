@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+
+{% load humanize %}
+
+{% block content %}
+<ul class="breadcrumbs">
+  <li><a href="{% url 'home' %}">Home</a></li>
+  <li><a href="{% url 'box_list' %}">Sections</a></li>
+  <li class="current">{{ box.title }}</li>
+</ul>
+
+{% endblock %}
+
+{% block side_bar %}
+<div class="side-nav">
+    <a href="{% url 'box_list' %}" class="button small expand secondary">
+        Boxes
+    </a>
+    <a href="{% url 'sec_list' %}" class="button small expand secondary">
+        Sections
+    </a>
+    <a href="{% url 'sub_list' %}" class="button small expand success">   
+        Subsections
+    </a>
+    <a href="{% url 'card_list' %}" class="button small expand secondary">
+        Cards
+    </a>
+    <a href="{% url 'box_update' box.id %}" class="button small expand">
+        <i class="fi-page-edit"></i> Edit</a>
+    <a href="{% url 'box_delete' box.id %}" class="button small expand alert">
+        <i class="fi-page-delete"></i> Delete</a>
+    <a href="{% url 'box_export' box.id %}" class="button small expand">
+        <i class="fi-page-export-pdf"></i> Export
+    </a>
+    <a href="#" class="button small expand">
+        <i class="fi-page-copy"></i> Clone
+    </a>
+</div>
+{% endblock %}
